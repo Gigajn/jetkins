@@ -1,13 +1,17 @@
 pipeline {
     agent any
+<<<<<<< HEAD
     environment {
         CI = 'true'
     }
+=======
+>>>>>>> 971c8fb8026fad0824d11797eed113078132447e
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Gigajn/jetkins.git'
             }
+<<<<<<< HEAD
             post {
                 success {
                     emailext subject: 'Checkout Succeeded', body: 'The Checkout stage succeeded!', 
@@ -31,11 +35,23 @@ pipeline {
                 failure {
                     emailext subject: 'Install Dependencies Failed', body: 'The Install Dependencies stage failed.', 
                     recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+=======
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'npm install'
+                    } else {
+                        bat 'npm install'
+                    }
+>>>>>>> 971c8fb8026fad0824d11797eed113078132447e
                 }
             }
         }
         stage('Run Unit Tests') {
             steps {
+<<<<<<< HEAD
                 bat 'npm run test:unit'
             }
             post {
@@ -128,5 +144,16 @@ pipeline {
             emailext subject: 'Pipeline Failed', body: 'The pipeline failed.', 
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
         }
+=======
+                script {
+                    if (isUnix()) {
+                        sh './run-tests.sh'
+                    } else {
+                        bat 'run-tests.bat'
+                    }
+                }
+            }
+        }
+>>>>>>> 971c8fb8026fad0824d11797eed113078132447e
     }
 }
