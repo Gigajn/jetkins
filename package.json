@@ -17,6 +17,7 @@
     "jest": "^29.7.0"
   },
   "devDependencies": {
+    "babel-loader": "^9.2.1",
     "chai": "^5.1.2",
     "mocha": "^11.0.1",
     "supertest": "^7.0.0",
